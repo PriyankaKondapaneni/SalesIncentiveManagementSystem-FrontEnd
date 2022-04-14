@@ -10,9 +10,6 @@ import { SalesService } from '../sales.service';
 })
 export class LoginComponent implements OnInit {
 
-  userName : string = '';
-  password : string = '';
-  role : string = '';
 
   sp : SalesPerson = new SalesPerson();
 
@@ -26,12 +23,48 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userName = '';
-    this.password = '';
+    this.sp = new SalesPerson();
+    if(this.salesService.isLoggedIn()){
+      if(this.salesService.getRole()=="admin"){
+        this.route.navigate(['/admin']);
+      }
+      else{
+        this.route.navigate(['/sales']);
+      }
+    }
   }
 
   login() {
-    this.sp.userName = this.userName;
+    
+    this.salesService.login(this.sp).subscribe((sp) => {
+      this.sp=sp;
+      let result = ' ';
+      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for ( let i = 0; i < 20; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      this.salesService.setToken( result,this.sp.role,this.sp.salesPersonId);
+      /*this.salesService.setToken( this.salesPersonId);*/
+        console.log("Login successful");
+
+        if(sp.role == 'sales') {
+          this.route.navigate(['/sales']);
+        } 
+
+        if( sp.role == 'admin') {
+          this.route.navigate(['/admin']);
+        }
+
+    }, err => {
+      alert("Login failed");
+      this.ngOnInit();
+    })
+
+  }
+   /* this.sp=this.sp;
+      this.salesService.setToken( this.sp.salesPersonId);
+    this.sp.salesPersonId = this.salesPersonId;
     this.sp.password = this.password;
     this.sp.role = this.role;
 
@@ -42,7 +75,6 @@ export class LoginComponent implements OnInit {
         this.ngOnInit();
       }else {
         console.log("Login successful");
-        localStorage.setItem("token",res.token);
 
         if(this.role == 'sales') {
           this.route.navigate(['/sales']);
@@ -59,6 +91,6 @@ export class LoginComponent implements OnInit {
       this.ngOnInit();
     })
 
-  }
+  }*/
 
 }

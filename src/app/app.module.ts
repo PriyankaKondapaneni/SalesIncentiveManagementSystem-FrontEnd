@@ -8,13 +8,15 @@ import { SalesComponent } from './sales/sales.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SalesComponent,
-    AdminComponent
+    AdminComponent,
+    AdminloginComponent,
   ],
   imports: [
     BrowserModule,

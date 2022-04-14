@@ -1,5 +1,5 @@
-export class SalesPerson {
-    salesPersonId: string;
+export class Admin {
+    adminId: string;
     name : string ;
     password : string ;
     role : string ;
