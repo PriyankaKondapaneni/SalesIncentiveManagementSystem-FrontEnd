@@ -29,8 +29,6 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  logout() {
-    this.route.navigate(['/']);
-  }
+ 
 
 }

@@ -12,15 +12,11 @@ import { SalesService } from '../sales.service';
 })
 export class AdminloginComponent implements OnInit {
 
-  id : string = '';
-  password : string = '';
-  role : string = '';
-
   sp : Admin = new Admin();
 
   roles : string[];
 
-  constructor(private adminService : AdminService, private route : Router ) { 
+  constructor(private salesService : AdminService, private route : Router ) { 
     this.roles = [
       'admin',
       'sales'
@@ -28,33 +24,22 @@ export class AdminloginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = '';
-    this.password = '';
+    this.sp = new Admin();
   }
 
   login() {
-    this.sp.adminId = this.id;
-    this.sp.password = this.password;
-    this.sp.role = this.role;
-
-    this.adminService.login(this.sp).subscribe(res => {
-
-      if(res == null) {
-        alert("Uername or password is wrong");
-        this.ngOnInit();
-      }else {
+    
+    this.salesService.login(this.sp).subscribe((sp) => {
+      this.sp=sp;
         console.log("Login successful");
-        localStorage.setItem("token",res.token);
 
-        if(this.role == 'sales') {
+        if(sp.role == 'sales') {
           this.route.navigate(['/sales']);
         } 
 
-        if( this.role == 'admin') {
+        if( sp.role == 'admin') {
           this.route.navigate(['/admin']);
         }
-
-      }
 
     }, err => {
       alert("Login failed");

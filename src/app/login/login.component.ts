@@ -24,14 +24,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.sp = new SalesPerson();
-    if(this.salesService.isLoggedIn()){
-      if(this.salesService.getRole()=="admin"){
-        this.route.navigate(['/admin']);
-      }
-      else{
-        this.route.navigate(['/sales']);
-      }
-    }
   }
 
   login() {

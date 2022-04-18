@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+    
+body{
+    background-image: url("a.jpeg");
+}
+</style>
+</head>
+<body>
+    <div id="bg"></div>
+<div class="topnav">
+    <a  style="float: left;" >Add Sales Person</a>
+</div>
+
+</body>
+</html>
+<br>
+<div class="col-md-6 offset-md-3">
+    <form (ngSubmit) = "onSubmit()">
+
+        <div class="form-group">
+            <label> ID</label>
+            <input type="text" class ="form-control" id = "salesPersonId"
+                [(ngModel)] = "user.salesPersonId" name = "salesPersonId">
+        </div>
+        <div class="form-group">
+            <label> Password</label>
+            <input type="text" class ="form-control" id = "password"
+                [(ngModel)] = "user.password" name = "password">
+        </div>
+        <div class="form-group">
+            <label>  Name</label>
+            <input type="text" class ="form-control" id = "firstname"
+                [(ngModel)] = "user.name" name = "name">
+        </div>
+        <div class="form-group">
+          <label>  Quota</label>
+          <input type="text" class ="form-control" id = "quota"
+              [(ngModel)] = "user.quota" name = "quota">
+      </div>
+    
+        <div class="form-group">
+            <label> Reporting Id</label>
+            <input type="text" class ="form-control" id = "reportingId"
+                [(ngModel)] = "user.reportingId" name = "reportingId">
+        </div>
+    
+        <div class="form-group">
+            <label> Location</label>
+            <input type="text" class ="form-control" id = "location"
+                [(ngModel)] = "user.location" name = "location">
+        </div>
+        <br>
+        <button class = "btn btn-success" type ="submit">Submit</button>
+    
+    </form>
+    </div> 

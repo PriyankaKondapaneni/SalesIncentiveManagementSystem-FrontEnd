@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CommissionRules } from './commission-rules';
 import { SalesPerson } from './sales-person';
 
 @Injectable({
@@ -41,6 +42,7 @@ export class SalesService {
   }
 
   loginUrl : string = '';
+  baseURL:string="http://localhost:8080/salesPerson/deleteSalesPerson";
 
   constructor(private http : HttpClient) {
 
@@ -50,6 +52,20 @@ export class SalesService {
 
   login(sp : SalesPerson) : Observable<any> {
     return this.http.post<any>(this.loginUrl,sp);
+  }
+  getUserList(): Observable<SalesPerson[]>{
+    return this.http.get<SalesPerson[]>("http://localhost:8080/salesPerson/users");
+  }
+
+  createUser(user: SalesPerson): Observable<Object>{
+    return this.http.post<any>("http://localhost:8080/salesPerson/addSalesPerson",user)
+  }
+
+  deleteUser(id: string): Observable<Object>{
+    return this.http.delete<any>(`${this.baseURL}/${id}`);
+  }
+  getRulesList(): Observable<CommissionRules[]>{
+    return this.http.get<CommissionRules[]>("http://localhost:8080/admin/rules");
   }
 
 }
